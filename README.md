@@ -92,7 +92,7 @@ pip install opencv-python mediapipe numpy pyyaml torch
 ```bash
 termux-x11 :0 -ac
 ```
-3. Enter the sandbox **with `-b`** (unrestricted mode)
+3. Enter the sandbox **with `-b`** (unrestricted mode). You may have to use another Termux session.
 4. Enter Xfce4 desktop **inside the sandbox**:
 ```bash
 mkdir -p /tmp/.X11-unix
