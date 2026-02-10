@@ -5,7 +5,8 @@ A tutorial of running a simple gesture recognition in Termux. You can check [thi
 ## Important Notes
 
 1. **This project is for masochism only.** If you are looking for a production-ready solution, please refer to [MediaPipe Solutions](https://ai.google.dev/edge/mediapipe/solutions/vision/gesture_recognizer) or [Google ML Kit](https://developers.google.com/ml-kit) for native Android/iOS integration.
-2. Everything below is guaranteed to work only on my specific device (OnePlus 13 24+1T, Android 15, ColorOS 15). Since implementation details vary significantly across different hardware, expect it to fail on your device.
+2. Everything below is guaranteed to work only on my specific device (OnePlus 13 24+1T, Android 15, ColorOS 15, Snapdragon 8 Elite). Since implementation details vary significantly across different hardware, expect it to fail on your device.
+3. Your device should have at least 5 GB of free space.
 
 ## Overview
 
@@ -46,15 +47,16 @@ pkg update
 pkg install x11-repo -y
 ```
 
-### Setup the sandbox
+### Create a sandbox
 
 Following the guidance [here](https://github.com/788009/termux-sandbox/blob/main/ubuntu/README.md):
 
 1. Install `ubuntu-sandbox`
 2. Create a sandbox
-3. Enter the sandbox with `-b` (unrestricted mode) 
 
 ### Setup the environment
+
+Enter the sandbox.
 
 > [!NOTE]
 >
@@ -90,21 +92,22 @@ pip install opencv-python mediapipe numpy pyyaml torch
 ```bash
 termux-x11 :0 -ac
 ```
-3. Enter Xfce4 desktop **inside the sandbox**:
+3. Enter the sandbox **with `-b`** (unrestricted mode)
+4. Enter Xfce4 desktop **inside the sandbox**:
 ```bash
 mkdir -p /tmp/.X11-unix
 mount --bind /host_root/data/data/com.termux/files/usr/tmp/.X11-unix /tmp/.X11-unix
 export DISPLAY=:0
 xfce4-session
 ```
-4. Run the script **inside the Xfce4 desktop** (using the Terminal Emulator):
+5. Run the script **inside the Xfce4 desktop** (using the Terminal Emulator):
 ```bash
 cd ~/gesture
 source .env/bin/activate
 python3 detect.py
 ```
-5. Maximize the window.
-6. Move your hand into the camera's field of view to see the result.
+6. Maximize the window.
+7. Move your hand into the camera's field of view to see the result.
 
 ## Stop and exit
 
@@ -122,6 +125,15 @@ python3 detect.py
 
 1. **Discussions**: Use this space to share your results or ask questions regarding specific phone models and operating systems.
 2. **Issues**: If you find a logic error in the code or a flaw in the instructions, please open an issue with your device details and error logs.
+
+## FAQ
+
+1. **Q: Why is the frame rate (FPS) so low?**  
+   **A**: Your processor lacks the necessary performance for this task. Hand landmark extraction and neural network inference are computationally intensive.
+2. **Q: Why is the video smooth but the latency is so high?**  
+   **A**: This is typically caused by the buffering mechanism of the network stream. Currently, there is no known solution to reduce the latency. You are encouraged to explore alternative camera apps capable of starting a camera server for potentially better results.
+3. **Q: Why is the recognition inaccurate sometimes?**  
+   **A**: The MLP model used here was developed as a school assignment and was not optimized for high precision.
 
 ## Support
 
