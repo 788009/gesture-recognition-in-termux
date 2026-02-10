@@ -58,19 +58,23 @@ Following the guidance [here](https://github.com/788009/termux-sandbox/blob/main
 
 > [!NOTE]
 >
-> Wi-Fi environment is recommended, and it may take a long time
+> Wi-Fi connection is recommended, and it may take a long time.
 
 **Inside the sandbox**, run the following scripts:
 
 ```bash
 apt update && apt upgrade -y
-apt install python3-pip python3-venv libgl1 libglib2.0-0 xfce4 dbus-x11 -y
+apt install curl python3-pip python3-venv libgl1 libglib2.0-0 xfce4 dbus-x11 -y
 # You may have to choose your area
 
 curl -L https://github.com/788009/gesture-recognition-in-termux/releases/download/latest/gesture.tar -o ~/gesture.tar
-tar -xvf ~/gesture.tar
+tar -xvf ~/gesture.tar -C ~
 cd ~/gesture
+```
 
+Make sure you have entered `~/gesture`, and then:
+
+```bash
 python3 -m venv .env
 source .env/bin/activate
 pip install opencv-python mediapipe numpy pyyaml torch
