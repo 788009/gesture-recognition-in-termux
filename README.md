@@ -88,7 +88,7 @@ pip install opencv-python mediapipe numpy pyyaml torch
 ## Run the script
 
 1. Start the camera server.
-2. Start X11 service **in the Termux host** (not the sandbox):
+2. Start X11 service **in the Termux host** (not inside the sandbox):
 ```bash
 termux-x11 :0 -ac
 ```
